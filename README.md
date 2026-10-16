@@ -17,6 +17,8 @@ IC-LoRA adapters. No partner API nodes anywhere in the pipeline.
 | Set on Fire / Smoke | Paint where the fire or smoke goes, get a simulation that grows between your keyframes | AInVFX Fluid |
 | Claymation / Frozen / Anime | Re-render the shot in a new look while keeping its structure and motion | Union Control (depth) |
 
+**Demo video (1:51):** [docs/demo/fxjutsu_demo.mp4](docs/demo/fxjutsu_demo.mp4) · **Try it:** http://82.70.50.254/
+
 ## Examples (before on top, after below)
 
 | Vanish, real street footage | Day to Night, real park footage |
