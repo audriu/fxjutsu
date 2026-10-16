@@ -1,9 +1,5 @@
-⨯ Failed to start server
-Error: listen EADDRINUSE: address already in use 0.0.0.0:3001
-    at ignore-listed frames {
-  code: 'EADDRINUSE',
-  errno: -98,
-  syscall: 'listen',
-  address: '0.0.0.0',
-  port: 3001
-}
+▲ Next.js 16.4.2
+- Local:         http://localhost:3001
+- Network:       http://0.0.0.0:3001
+✓ Ready in 210ms
+✓ Running next.config.ts took 50ms

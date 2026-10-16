@@ -261,7 +261,7 @@ export function Studio() {
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 lg:sticky lg:top-6 lg:self-start">
           <h2 className="text-sm font-medium uppercase tracking-wider text-zinc-400">Result</h2>
           <div className="relative overflow-hidden rounded-2xl border border-zinc-800 bg-black">
             {result ? (
