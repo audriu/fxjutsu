@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { submitEffect, submitFluid } from "@/lib/comfy";
 import { getPreset } from "@/lib/presets";
+import { reserve, started } from "@/lib/guard";
 
 
 const MAX_VIDEO_BYTES = 100 * 1024 * 1024;
@@ -47,10 +48,14 @@ export async function POST(request: Request) {
     return NextResponse.json({ error: error instanceof Error ? error.message : "Bad request." }, { status: 400 });
   }
 
+  const slot = reserve();
+  if (!slot.ok) return NextResponse.json({ error: slot.reason }, { status: 429 });
+
   try {
     const job = painted
       ? await submitFluid(painted.first, painted.last, { width: painted.width, height: painted.height }, { presetId, scene, notes, strength, seed })
       : await submitEffect(video!, frame!, { presetId, scene, notes, strength, seed });
+    started(job.id);
     return NextResponse.json(job, { status: 202 });
   } catch (error) {
     const missingApiKey = error instanceof Error && error.message.includes("COMFY_API_KEY");
