@@ -1,8 +1,8 @@
 schema: comfy-build/1
-id: null
+id: 94f8299b-a61f-4bd4-b7a0-de1e6597b187
 name: fxjutsu
 description: ''
-syncedRevision: null
+syncedRevision: '2026-10-16T18:11:46.670482Z'
 definition:
   schema: distribution-definition/0
   baseComfyVersion: v0.41.2
@@ -12,44 +12,52 @@ definition:
       sha256: c4279eeff115cbeaca494bd2183e7d768c38fe85a184dc6afbb7159157c44334
       sizeBytes: 21504034224
       source: local
+      sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/diffusion_models/ltx-2.5-22b-distilled-transformer-comfy-int8-convrot.safetensors?download=true
       type: diffusion_models
     - filename: ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors
       localPath: latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors
       sha256: eb5a71fe4068ee87ccdb1c3aa635e547ca76bd2d30ae20ae889f2c325c0677e8
       sizeBytes: 995778752
       source: local
+      sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/latent_upscale_models/ltx-2.5-latent-spatial-upscaler-x2-bf16-1.0.safetensors?download=true
       type: latent_upscale_models
     - filename: ainvfx-fluid.safetensors
       localPath: loras/ainvfx-fluid.safetensors
       sha256: 9f1e188a76adf242521b6c92f0d582221518220af24d985ef344dc5ba8e06a79
       sizeBytes: 654446312
       source: local
+      sourceUri: https://huggingface.co/AInVFX/ainvfx-fluid/resolve/main/ltx-2.5/ainvfx-fluid.safetensors
       type: loras
     - filename: ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors
       localPath: loras/ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors
       sha256: a1b888a87f661d27f08b394ae559e8e1050be33900bcc36a5cdf659e48f88d18
       sizeBytes: 654465352
       source: local
+      sourceUri: https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-Union-Control/resolve/main/ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors
       type: loras
     - filename: ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors
       localPath: loras/ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors
       sha256: d9e143f979e0756f0c83d772e6a8890f4c6b933db1f7d93fc06e25c179f3fd36
       sizeBytes: 1308787472
       source: local
+      sourceUri: https://huggingface.co/Lightricks/LTX-2.5-22b-IC-LoRA-Alpha-Gen/resolve/main/ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors
       type: loras
-    - filename: ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors
+    - blobId: 5e6c4f4e-cb0c-43c5-9393-dcb3c04a86d3
+      filename: ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors
       localPath: loras/ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors
       sha256: 27f4f7ba552d3bf7273dd817291123a5934f17e7698ca9cd8945b079a5358393
       sizeBytes: 327318439
       source: local
       type: loras
-    - filename: ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors
+    - blobId: cc84dc4d-a757-481e-b793-2aae9f120ecd
+      filename: ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors
       localPath: loras/ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors
       sha256: 2212838ea446628a07eddb57734427b2150e9cf159b19360cda28365a30b275b
       sizeBytes: 327318440
       source: local
       type: loras
-    - filename: ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors
+    - blobId: b3d0b7e8-5a6e-4b76-bbfd-684d8932ff0a
+      filename: ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors
       localPath: loras/ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors
       sha256: 58c244d24a4381858749e66fae9fd1b91aec6b546f83f3f81a7a10b4934a7857
       sizeBytes: 906080568
@@ -60,47 +68,54 @@ definition:
       sha256: 6ce688a0aa98a5fa36a9f1e6c3f42152a498cc2b53ee8c15674c64244f91487f
       sizeBytes: 15372969374
       source: local
+      sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/text_encoders/gemma4-12b-with-proj-ltx-2.5-comfy-int8-convrot.safetensors?download=true
       type: text_encoders
     - filename: gemma4_e2b_it_int8_convrot.safetensors
       localPath: text_encoders/gemma4_e2b_it_int8_convrot.safetensors
       sha256: efeca0fcad2f863e5ed0a75e3af952b72bc963604c1dda6d20aee87a32b17566
       sizeBytes: 5199997904
       source: local
+      sourceUri: https://huggingface.co/Comfy-Org/gemma-4/resolve/main/text_encoders/gemma4_e2b_it_int8_convrot.safetensors
       type: text_encoders
     - filename: ltx-2.5-audio-vae-bf16.safetensors
       localPath: vae/ltx-2.5-audio-vae-bf16.safetensors
       sha256: c52733d37f6a7fb7949c3dc0fb468c6cb2169e4d836983a73babb9f0d54837a5
       sizeBytes: 364866540
       source: local
+      sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-audio-vae-bf16.safetensors?download=true
       type: vae
     - filename: ltx-2.5-video-vae-bf16.safetensors
       localPath: vae/ltx-2.5-video-vae-bf16.safetensors
       sha256: 847e14ca7f3355debca0cea4eaa24ac0fbcdf0061da054ac89ca638a869ddba3
       sizeBytes: 1472223346
       source: local
+      sourceUri: https://huggingface.co/Lightricks/LTX-2.5/resolve/main/vae/ltx-2.5-video-vae-bf16.safetensors?download=true
       type: vae
     - filename: video_depth_anything_vits.pth
       localPath: videodepthanything/video_depth_anything_vits.pth
       sha256: 13379300b739e659f076a59d52e9801bd8d38c541a7e71f73bbca4dcfb013609
       sizeBytes: 116440756
       source: local
+      sourceUri: https://huggingface.co/daydreamlive/Video-Depth-Anything-Small/resolve/main/video_depth_anything_vits.pth
       type: videodepthanything
   customNodes:
-    - gitRef: null
+    - blobId: 096b3feb-3db9-4e42-aacb-4932714a66e5
+      gitRef: null
       localDigest: 4dba2a403b5c6181a8130218433b9b30a5a5e9ab1e68db464fe868073a9130e1
       localPath: ComfyUI-LTXVideo
       localSizeBytes: 45156938
       name: ComfyUI-LTXVideo
       repository: null
       source: local
-    - gitRef: null
+    - blobId: 959d6b9a-2915-4cc3-a5a2-b03874e49d45
+      gitRef: null
       localDigest: 3d243448741dc79559eb3e9a2ee6e149025f71d88d935aec864d835ba49e59fc
       localPath: ComfyUI-Video-Depth-Anything
       localSizeBytes: 145572
       name: ComfyUI-Video-Depth-Anything
       repository: null
       source: local
-  pipDependencies: ""
+  pipDependencies: |-
   environment:
     arch: x86_64
     os: Linux
