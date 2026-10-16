@@ -23,9 +23,13 @@ IC-LoRA adapters. No partner API nodes anywhere in the pipeline.
 |---|---|
 | ![Vanish](docs/examples/vanish_street.jpg) | ![Night](docs/examples/night_park.jpg) |
 
-| Claymation (depth-guided restyle) | Fire from painted keyframes (top: the two painted frames) |
+| Anime, real park footage (depth-guided restyle) | Set on Fire, real street footage (top: the two painted keyframes) |
 |---|---|
-| ![Clay](docs/examples/claymation.jpg) | ![Fire](docs/examples/fire_keyframes.jpg) |
+| ![Anime](docs/examples/anime_park.jpg) | ![Fire](docs/examples/fire_street.jpg) |
+
+| Flood (strength 1.3) and Rainy Day (1.1) on the same street clip | Claymation |
+|---|---|
+| ![Flood](docs/examples/flood_street.jpg) ![Rain](docs/examples/rain_street.jpg) | ![Clay](docs/examples/claymation.jpg) |
 
 Water simulation (middle row) and alpha matte (bottom row) on the same clip: ![Water and matte](docs/examples/water_and_matte.jpg)
 
