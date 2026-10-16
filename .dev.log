@@ -42,3 +42,4 @@ Ecmascript file had an error
  GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 342ms (next.js: 12ms, application-code: 330ms)
  GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e/outputs/eyJqIjogIjJkODg3MjBiLTNjZTQtNGI5ZS1iMGFlLWRjZWVjYjUyMTA3ZSIsICJmIjogInZhbmlzaF8wMDAwMV8ubXA0IiwgInMiOiAiZnhqdXRzdSIsICJ0IjogIm91dHB1dCJ9.iWxBySoF0hKOHzqBWXj4ciZScHZM1j6qnK4FQYJvrPQ 200 in 2.0s (next.js: 498ms, application-code: 1539ms)
 ✓ Compiled in 22ms
+✓ Compiled in 27ms
