@@ -6,98 +6,34 @@
 - Local:         http://localhost:3000
 - Network:       http://10.255.255.254:3000
 - Environments: .env.local
-✓ Ready in 692ms
-✓ Running next.config.ts took 182ms
+✓ Ready in 913ms
+✓ Running next.config.ts took 62ms
 - Cache Components enabled
 - Partial Prefetching enabled
 
- GET / 200 in 306ms (next.js: 176ms, application-code: 130ms)
-⨯ ./app/api/jobs/route.ts:5:14
-Error: Route segment config "runtime" is not compatible with `nextConfig.cacheComponents`. Please remove it.
-  [90m3 |[0m [36mimport[0m { getPreset } [36mfrom[0m [32m"@/lib/presets"[0m;
-  [90m4 |[0m
-[31m[1m>[0m [90m5 |[0m [36mexport[0m [36mconst[0m runtime = [32m"nodejs"[0m;
-  [90m  |[0m              [31m[1m^^^^^^^[0m
-  [90m6 |[0m
-  [90m7 |[0m [36mconst[0m [33mMAX_VIDEO_BYTES[0m = [35m100[0m * [35m1024[0m * [35m1024[0m;
-  [90m8 |[0m
+ GET / 200 in 582ms (next.js: 335ms, application-code: 247ms)
+ GET / 200 in 53ms (next.js: 1.8ms, application-code: 51ms)
+ POST /api/jobs 202 in 8.5s (next.js: 100ms, application-code: 8.4s)
+ GET /api/jobs/6f7ea317-6b81-4e75-8fba-287fc6f3534a 200 in 1363ms (next.js: 787ms, application-code: 575ms)
+ GET /api/jobs/6f7ea317-6b81-4e75-8fba-287fc6f3534a 200 in 564ms (next.js: 29ms, application-code: 535ms)
+ GET /api/jobs/6f7ea317-6b81-4e75-8fba-287fc6f3534a 200 in 780ms (next.js: 14ms, application-code: 766ms)
+ GET /api/jobs/6f7ea317-6b81-4e75-8fba-287fc6f3534a 200 in 909ms (next.js: 13ms, application-code: 896ms)
+ GET /api/jobs/6f7ea317-6b81-4e75-8fba-287fc6f3534a/outputs/2f49e3f9-55ee-559f-9ea5-4b2e4544092a 200 in 3.9s (next.js: 735ms, application-code: 3.2s)
+ GET / 200 in 173ms (next.js: 8ms, application-code: 165ms)
+⚠ Blocked cross-origin request to Next.js dev resource /_next/hmr from "127.0.0.1".
+Cross-origin access to Next.js dev resources is blocked by default for safety.
 
-Ecmascript file had an error
+To allow this host in development, add it to "allowedDevOrigins" in next.config.js and restart the dev server:
 
+// next.config.js
+module.exports = {
+  allowedDevOrigins: ['127.0.0.1'],
+}
 
- POST /api/jobs 500 in 842ms (next.js: 749ms, application-code: 93ms)
- POST /api/jobs 202 in 1982ms (next.js: 96ms, application-code: 1886ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 1297ms (next.js: 527ms, application-code: 769ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 1903ms (next.js: 14ms, application-code: 1889ms)
- GET / 200 in 68ms (next.js: 1.4ms, application-code: 67ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 640ms (next.js: 13ms, application-code: 627ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 739ms (next.js: 14ms, application-code: 726ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 608ms (next.js: 13ms, application-code: 595ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 461ms (next.js: 12ms, application-code: 449ms)
-✓ Compiled in 10ms
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 649ms (next.js: 13ms, application-code: 636ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 902ms (next.js: 12ms, application-code: 890ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 1963ms (next.js: 12ms, application-code: 1951ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 653ms (next.js: 15ms, application-code: 639ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 342ms (next.js: 12ms, application-code: 330ms)
- GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e/outputs/eyJqIjogIjJkODg3MjBiLTNjZTQtNGI5ZS1iMGFlLWRjZWVjYjUyMTA3ZSIsICJmIjogInZhbmlzaF8wMDAwMV8ubXA0IiwgInMiOiAiZnhqdXRzdSIsICJ0IjogIm91dHB1dCJ9.iWxBySoF0hKOHzqBWXj4ciZScHZM1j6qnK4FQYJvrPQ 200 in 2.0s (next.js: 498ms, application-code: 1539ms)
-✓ Compiled in 22ms
-✓ Compiled in 27ms
- GET / 200 in 39ms (next.js: 3ms, application-code: 36ms)
- POST /api/jobs 202 in 1211ms (next.js: 2ms, application-code: 1208ms)
- GET /api/jobs/c047ec62-816a-4864-bcf2-7a24f0a195cd 200 in 839ms (next.js: 18ms, application-code: 822ms)
- GET /api/jobs/c047ec62-816a-4864-bcf2-7a24f0a195cd 200 in 760ms (next.js: 13ms, application-code: 747ms)
- GET /api/jobs/c047ec62-816a-4864-bcf2-7a24f0a195cd 200 in 1060ms (next.js: 12ms, application-code: 1048ms)
- GET /api/jobs/c047ec62-816a-4864-bcf2-7a24f0a195cd 200 in 629ms (next.js: 12ms, application-code: 617ms)
- GET /api/jobs/c047ec62-816a-4864-bcf2-7a24f0a195cd 200 in 984ms (next.js: 11ms, application-code: 973ms)
- GET /api/jobs/c047ec62-816a-4864-bcf2-7a24f0a195cd 200 in 883ms (next.js: 12ms, application-code: 871ms)
- GET /api/jobs/c047ec62-816a-4864-bcf2-7a24f0a195cd 200 in 434ms (next.js: 11ms, application-code: 423ms)
- POST /api/jobs 202 in 2.9s (next.js: 0.7ms, application-code: 2.9s)
- POST /api/jobs 202 in 2.3s (next.js: 0.7ms, application-code: 2.3s)
- POST /api/jobs 202 in 1185ms (next.js: 0.9ms, application-code: 1184ms)
- GET /api/jobs/6c03a3dc-fb2e-4dd3-ac76-0652102f8a2a 200 in 724ms (next.js: 16ms, application-code: 708ms)
- GET /api/jobs/6c03a3dc-fb2e-4dd3-ac76-0652102f8a2a 200 in 2.9s (next.js: 13ms, application-code: 2.9s)
- GET /api/jobs/6c03a3dc-fb2e-4dd3-ac76-0652102f8a2a 200 in 947ms (next.js: 13ms, application-code: 934ms)
- GET /api/jobs/6c03a3dc-fb2e-4dd3-ac76-0652102f8a2a 200 in 808ms (next.js: 13ms, application-code: 795ms)
- GET /api/jobs/6c03a3dc-fb2e-4dd3-ac76-0652102f8a2a 200 in 705ms (next.js: 13ms, application-code: 691ms)
- GET /api/jobs/6c03a3dc-fb2e-4dd3-ac76-0652102f8a2a 200 in 641ms (next.js: 13ms, application-code: 628ms)
- GET /api/jobs/edc5f1c4-cad6-45e3-ba1f-e0eddca6c87d 200 in 787ms (next.js: 13ms, application-code: 774ms)
- GET /api/jobs/edc5f1c4-cad6-45e3-ba1f-e0eddca6c87d 200 in 1234ms (next.js: 58ms, application-code: 1176ms)
- GET /api/jobs/edc5f1c4-cad6-45e3-ba1f-e0eddca6c87d 200 in 883ms (next.js: 12ms, application-code: 870ms)
- GET /api/jobs/edc5f1c4-cad6-45e3-ba1f-e0eddca6c87d 200 in 2.1s (next.js: 13ms, application-code: 2.1s)
- GET /api/jobs/edc5f1c4-cad6-45e3-ba1f-e0eddca6c87d 200 in 923ms (next.js: 13ms, application-code: 910ms)
- GET /api/jobs/edc5f1c4-cad6-45e3-ba1f-e0eddca6c87d 200 in 358ms (next.js: 13ms, application-code: 345ms)
- GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 405ms (next.js: 0.8ms, application-code: 404ms)
- GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 688ms (next.js: 13ms, application-code: 675ms)
- GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 1694ms (next.js: 13ms, application-code: 1680ms)
- GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 751ms (next.js: 12ms, application-code: 739ms)
- GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 761ms (next.js: 13ms, application-code: 748ms)
- GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 393ms (next.js: 14ms, application-code: 379ms)
- POST /api/jobs 202 in 697ms (next.js: 1.1ms, application-code: 696ms)
- POST /api/jobs 202 in 2.2s (next.js: 0.7ms, application-code: 2.2s)
- POST /api/jobs 202 in 266ms (next.js: 0.7ms, application-code: 265ms)
- GET /api/jobs/09e87c99-b53f-4753-bb6a-dcd91bfb43b2 200 in 551ms (next.js: 15ms, application-code: 536ms)
- GET /api/jobs/09e87c99-b53f-4753-bb6a-dcd91bfb43b2 200 in 1036ms (next.js: 12ms, application-code: 1024ms)
- GET /api/jobs/09e87c99-b53f-4753-bb6a-dcd91bfb43b2 200 in 992ms (next.js: 13ms, application-code: 980ms)
- GET /api/jobs/09e87c99-b53f-4753-bb6a-dcd91bfb43b2 200 in 865ms (next.js: 13ms, application-code: 852ms)
- GET /api/jobs/09e87c99-b53f-4753-bb6a-dcd91bfb43b2 200 in 843ms (next.js: 12ms, application-code: 831ms)
- GET /api/jobs/09e87c99-b53f-4753-bb6a-dcd91bfb43b2 200 in 615ms (next.js: 44ms, application-code: 571ms)
- GET /api/jobs/d89c9081-519d-4961-aaa6-ba545f9bb6a8 200 in 482ms (next.js: 0.6ms, application-code: 481ms)
- GET /api/jobs/d89c9081-519d-4961-aaa6-ba545f9bb6a8 200 in 1054ms (next.js: 13ms, application-code: 1041ms)
- GET /api/jobs/d89c9081-519d-4961-aaa6-ba545f9bb6a8 200 in 871ms (next.js: 13ms, application-code: 858ms)
- GET /api/jobs/d89c9081-519d-4961-aaa6-ba545f9bb6a8 200 in 753ms (next.js: 13ms, application-code: 740ms)
- GET /api/jobs/d89c9081-519d-4961-aaa6-ba545f9bb6a8 200 in 709ms (next.js: 14ms, application-code: 695ms)
- GET /api/jobs/2bf5bcf2-b90d-4c91-bd37-5df8aa41a38c 200 in 682ms (next.js: 13ms, application-code: 669ms)
- GET /api/jobs/2bf5bcf2-b90d-4c91-bd37-5df8aa41a38c 200 in 804ms (next.js: 13ms, application-code: 791ms)
- GET /api/jobs/2bf5bcf2-b90d-4c91-bd37-5df8aa41a38c 200 in 875ms (next.js: 12ms, application-code: 863ms)
- GET /api/jobs/2bf5bcf2-b90d-4c91-bd37-5df8aa41a38c 200 in 914ms (next.js: 13ms, application-code: 901ms)
- GET /api/jobs/2bf5bcf2-b90d-4c91-bd37-5df8aa41a38c 200 in 782ms (next.js: 12ms, application-code: 769ms)
- GET /api/jobs/2bf5bcf2-b90d-4c91-bd37-5df8aa41a38c 200 in 664ms (next.js: 13ms, application-code: 651ms)
- GET /api/jobs/2bf5bcf2-b90d-4c91-bd37-5df8aa41a38c 200 in 683ms (next.js: 12ms, application-code: 670ms)
- POST /api/jobs 202 in 654ms (next.js: 4ms, application-code: 649ms)
- GET /api/jobs/377f5d4d-397f-4463-b328-fd697791cc75 200 in 324ms (next.js: 19ms, application-code: 306ms)
- GET /api/jobs/377f5d4d-397f-4463-b328-fd697791cc75 200 in 930ms (next.js: 14ms, application-code: 916ms)
- GET /api/jobs/377f5d4d-397f-4463-b328-fd697791cc75 200 in 859ms (next.js: 14ms, application-code: 845ms)
- GET /api/jobs/377f5d4d-397f-4463-b328-fd697791cc75 200 in 813ms (next.js: 14ms, application-code: 800ms)
- GET /api/jobs/377f5d4d-397f-4463-b328-fd697791cc75 200 in 846ms (next.js: 14ms, application-code: 832ms)
- GET /api/jobs/377f5d4d-397f-4463-b328-fd697791cc75 200 in 952ms (next.js: 15ms, application-code: 937ms)
+Read more: https://nextjs.org/docs/app/api-reference/config/next-config-js/allowedDevOrigins
+ GET / 200 in 78ms (next.js: 2ms, application-code: 75ms)
+ GET / 200 in 60ms (next.js: 1.4ms, application-code: 59ms)
+ GET / 200 in 79ms (next.js: 1.5ms, application-code: 78ms)
+ GET / 200 in 51ms (next.js: 1.2ms, application-code: 50ms)
+ GET / 200 in 53ms (next.js: 0.9ms, application-code: 52ms)
+ GET / 200 in 49ms (next.js: 1.1ms, application-code: 48ms)
