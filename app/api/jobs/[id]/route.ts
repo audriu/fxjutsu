@@ -1,7 +1,6 @@
 import { NextResponse } from "next/server";
 import { getJob } from "@/lib/comfy";
 
-export const runtime = "nodejs";
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string }> }) {
   try {

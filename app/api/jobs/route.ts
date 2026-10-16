@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 import { submitEffect } from "@/lib/comfy";
 import { getPreset } from "@/lib/presets";
 
-export const runtime = "nodejs";
 
 const MAX_VIDEO_BYTES = 100 * 1024 * 1024;
 

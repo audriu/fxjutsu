@@ -1,6 +1,5 @@
 import { getOutput } from "@/lib/comfy";
 
-export const runtime = "nodejs";
 
 export async function GET(_: Request, { params }: { params: Promise<{ id: string; outputId: string }> }) {
   try {

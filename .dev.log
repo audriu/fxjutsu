@@ -1,0 +1,29 @@
+
+> fxjutsu@0.1.0 dev
+> next dev --port 3000
+
+▲ Next.js 16.4.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://10.255.255.254:3000
+- Environments: .env.local
+✓ Ready in 692ms
+✓ Running next.config.ts took 182ms
+- Cache Components enabled
+- Partial Prefetching enabled
+
+ GET / 200 in 306ms (next.js: 176ms, application-code: 130ms)
+⨯ ./app/api/jobs/route.ts:5:14
+Error: Route segment config "runtime" is not compatible with `nextConfig.cacheComponents`. Please remove it.
+  [90m3 |[0m [36mimport[0m { getPreset } [36mfrom[0m [32m"@/lib/presets"[0m;
+  [90m4 |[0m
+[31m[1m>[0m [90m5 |[0m [36mexport[0m [36mconst[0m runtime = [32m"nodejs"[0m;
+  [90m  |[0m              [31m[1m^^^^^^^[0m
+  [90m6 |[0m
+  [90m7 |[0m [36mconst[0m [33mMAX_VIDEO_BYTES[0m = [35m100[0m * [35m1024[0m * [35m1024[0m;
+  [90m8 |[0m
+
+Ecmascript file had an error
+
+
+ POST /api/jobs 500 in 842ms (next.js: 749ms, application-code: 93ms)
+ POST /api/jobs 202 in 1982ms (next.js: 96ms, application-code: 1886ms)
