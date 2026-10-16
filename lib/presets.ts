@@ -66,7 +66,7 @@ export const PRESETS: Preset[] = [
     tagline: "A wall of churning water crashes through the shot.",
     family: "elemental",
     lora: "ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
-    strength: 1.45,
+    strength: 1.35,
     prompt:
       "Reference shows {scene}. Edited shows the same scene with water added.\nADD WATER a colossal tsunami wall of churning blue-green water surging through the scene, crashing waves, heavy spray and splashes, foam, everything partially submerged.",
     negative: "",

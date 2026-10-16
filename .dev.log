@@ -27,3 +27,10 @@ Ecmascript file had an error
 
  POST /api/jobs 500 in 842ms (next.js: 749ms, application-code: 93ms)
  POST /api/jobs 202 in 1982ms (next.js: 96ms, application-code: 1886ms)
+ GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 1297ms (next.js: 527ms, application-code: 769ms)
+ GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 1903ms (next.js: 14ms, application-code: 1889ms)
+ GET / 200 in 68ms (next.js: 1.4ms, application-code: 67ms)
+ GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 640ms (next.js: 13ms, application-code: 627ms)
+ GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 739ms (next.js: 14ms, application-code: 726ms)
+ GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 608ms (next.js: 13ms, application-code: 595ms)
+ GET /api/jobs/2d88720b-3ce4-4b9e-b0ae-dceecb52107e 200 in 461ms (next.js: 12ms, application-code: 449ms)
