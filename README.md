@@ -14,8 +14,8 @@ IC-LoRA adapters. No partner API nodes anywhere in the pipeline.
 | Day to Night | Relights the same shot as a moonlit night | Day-To-Night |
 | Flood / Tsunami | Adds water that reacts to the scene, from a shallow flood to a tsunami | Water-Simulation |
 | Alpha Matte | Pulls a clean alpha matte of the foreground, no green screen | Alpha-Gen |
-| Fire & Smoke (wip) | Paint where the fire goes, get a fire/smoke simulation | AInVFX Fluid |
-| Restyle (wip) | Re-render the shot in a new look while keeping its structure | Union Control (depth) |
+| Set on Fire / Smoke | Paint where the fire or smoke goes, get a simulation that grows between your keyframes | AInVFX Fluid |
+| Claymation / Frozen / Anime | Re-render the shot in a new look while keeping its structure and motion | Union Control (depth) |
 
 ## How it works
 
