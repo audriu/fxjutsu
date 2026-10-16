@@ -7,6 +7,8 @@ type Output = { id: string; name: string; type: string; url: string };
 type Job = { id: string; status: string; outputs: Output[]; error?: unknown };
 
 const ACTIVE = ["queued", "running", "pending", "in_progress"];
+// One-line description of the bundled sample clip; scene text helps the restyle looks (Toon World most of all).
+const SAMPLE_SCENE = "a woman in a beige trench coat walking along a paved park path covered with fallen autumn leaves, hedges and a grey stone building behind";
 const DONE = ["succeeded", "completed", "failed", "canceled", "expired", "error"];
 
 function errorText(error: unknown): string {
@@ -167,7 +169,8 @@ export function Studio() {
     ? rendered[rendered.length - 1] ?? job.outputs.filter((o) => /\.(mp4|webm|mov)$/i.test(o.name)).at(-1)
     : undefined;
 
-  const families = Array.from(new Set(PRESETS.map((p) => p.family)));
+  // The composite family (several adapters + a matte in one graph) is listed first; Vanish stays the default preset.
+  const families = Array.from(new Set(PRESETS.map((p) => p.family))).sort((a, b) => Number(b === "composite") - Number(a === "composite"));
 
   return (
     <main className="mx-auto max-w-6xl px-4 py-8 text-zinc-100">
@@ -192,7 +195,7 @@ export function Studio() {
                 <div className="mt-2">Click to choose a clip (MP4, MOV or WebM, up to 100 MB)</div>
                 <div className="mt-1 text-xs text-zinc-500">4-8 seconds works best. Landscape or portrait.</div>
                 <button type="button" className="mt-4 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-300 hover:border-fuchsia-500"
-                  onClick={async (e) => { e.preventDefault(); const r = await fetch("/samples/park-walk.mp4"); const b = await r.blob(); chooseVideo(new File([b], "park-walk.mp4", { type: "video/mp4" })); }}>
+                  onClick={async (e) => { e.preventDefault(); const r = await fetch("/samples/park-walk.mp4"); const b = await r.blob(); if (!scene.trim()) setScene(SAMPLE_SCENE); chooseVideo(new File([b], "park-walk.mp4", { type: "video/mp4" })); }}>
                   or try the sample clip
                 </button>
               </div>
