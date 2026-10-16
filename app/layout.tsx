@@ -23,7 +23,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="bg-zinc-950 min-h-full flex flex-col">{children}</body>
+      <body className="bg-zinc-950 min-h-full flex flex-col" style={{ background: "#09090b", color: "#f4f4f5" }}>{children}</body>
     </html>
   );
 }
