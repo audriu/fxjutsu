@@ -296,7 +296,10 @@ export function Studio() {
           )}
           {meta && (
             <p className="text-xs text-zinc-500">
-              Source {meta.width}x{meta.height}, {meta.duration.toFixed(1)} s{elapsed ? ` · last render ${elapsed}s` : ""}. Output is rendered at 960x544-class resolution, 8k+1 frames, with the original audio.
+              Source {meta.width}x{meta.height}, {meta.duration.toFixed(1)} s{elapsed ? ` · last render ${elapsed}s` : ""}.{" "}
+              {preset.composite
+                ? "Composited at the clip's own resolution (up to 1920 px, first 5 s): outside the matte every pixel is your original footage, with its original sound."
+                : "Output is rendered at 960x544-class resolution, 8k+1 frames, with the original audio."}
             </p>
           )}
         </div>

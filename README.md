@@ -16,6 +16,9 @@ IC-LoRA adapters. No partner API nodes anywhere in the pipeline.
 | Alpha Matte | Pulls a clean alpha matte of the foreground, no green screen | Alpha-Gen |
 | Set on Fire / Smoke | Paint where the fire or smoke goes, get a simulation that grows between your keyframes | AInVFX Fluid |
 | Claymation / Frozen / Anime | Re-render the shot in a new look while keeping its structure and motion | Union Control (depth) |
+| **Golden Statue / Hologram** | Only the people change; the rest of the frame stays the original footage, pixel for pixel | Alpha-Gen + Union Control, composited |
+| **Toon World** | The world turns into an anime, the people in it stay real | Alpha-Gen + Clean-Plate + Union Control, composited |
+| **Ghost** | The people turn into see-through, glowing ghosts over the rebuilt background | Alpha-Gen + Clean-Plate, composited |
 
 **Demo video (1:51):** [docs/demo/fxjutsu_demo.mp4](docs/demo/fxjutsu_demo.mp4)
 
@@ -37,6 +40,48 @@ Water simulation (middle row) and alpha matte (bottom row) on the same clip: ![W
 
 All renders: RTX 4090, LTX-2.5 distilled int8, 8 steps, native resolution, 2-3 minutes per 5-second clip.
 
+## Composite effects: three adapters, one graph
+
+A single IC-LoRA pass re-generates the whole frame at about 544p. The composite presets chain adapters inside one ComfyUI
+graph and finish with a real compositing step, the way a VFX artist would:
+
+```
+clip ──┬── Alpha-Gen IC-LoRA ─────────────────────────────▶ matte: who is the subject
+       ├── Clean-Plate IC-LoRA ──▶ the same shot, empty ──┐   (Toon World, Ghost)
+       └── Union Control restyle (depth) ◀────────────────┘   (Golden Statue, Hologram, Toon World)
+                                   │
+         core-node composite at the clip's own resolution (ImageCompositeMasked, GrowMask, ImageBlur, MaskComposite)
+                                   ▼
+       outside the matte (or inside it, for Toon World) every pixel is the original footage, with the original sound
+```
+
+- **Golden Statue / Hologram:** restyle the shot by depth, then keep only the subject (Alpha-Gen matte, grown 2 px and
+  feathered) over the untouched original frames.
+- **Toon World:** remove the people first (Clean-Plate), restyle the *empty* plate, then lay the real people back on top.
+  Restyling the empty plate is what keeps a cartoon copy of the subject from peeking out around the real one.
+- **Ghost:** the clean plate fills the hole, and the subject goes back on top at 62% with a screen-blended glow and a
+  cold tint.
+
+The graphs are generated, not hand-wired: [`scripts/build_composite_workflows.py`](scripts/build_composite_workflows.py)
+copies the two tested Lightricks graphs as prefixed passes (`matte.*`, `plate.*`, `fx.*`), de-duplicates the shared model
+loaders, and joins them with core nodes only, so the same Comfy API build serves them. Details that make the composite
+line up: the clip is trimmed to 5 s with `Video Slice` *before* decoding and capped at 121 frames and 1920 px; the restyle
+pass stretches its depth guide to a multiple of 64 instead of centre-cropping it, so the matte and the restyle cover the
+same pixels; LTX renders 8k+1 frames, so the original frames, the matte and the sound are trimmed to the rendered count.
+
+On an RTX PRO 6000 (the hosted GPU) a composite takes about 45-60 s (two passes) or 100 s (Toon World, three passes)
+once the models are loaded.
+
+Golden Statue, step by step (source, Alpha-Gen matte, full-frame restyle, composite):
+![Golden Statue, step by step](docs/examples/how_gold.jpg)
+
+Toon World, step by step (source, Clean-Plate pass, restyle of the empty plate, composite):
+![Toon World, step by step](docs/examples/how_toon.jpg)
+
+| Hologram | Ghost |
+|---|---|
+| ![Hologram](docs/examples/hologram_street.jpg) | ![Ghost](docs/examples/ghost_street.jpg) |
+
 ## How it works
 
 ```
@@ -52,17 +97,16 @@ browser  ──upload clip + first frame, preset, notes──▶  Next.js API ro
                                result video (with the source audio) ◀── polled + streamed back to the UI
 ```
 
-One ComfyUI graph (the Lightricks LTX-2.5 video-to-video IC-LoRA graph, exported in API format) serves every preset;
-the app only swaps the adapter, strength, prompt and inputs by node id (`lib/comfy.ts`). Prompt conventions per adapter
-are documented in [`docs/adapters.md`](docs/adapters.md).
+Three Lightricks LTX-2.5 graphs exported in API format (video-to-video IC-LoRA, Union Control restyle, AInVFX fluid)
+plus the three generated composite graphs serve every preset; the app only swaps the adapter, strength, prompt and inputs
+by node id (`lib/comfy.ts`). Prompt conventions per adapter are documented in [`docs/adapters.md`](docs/adapters.md).
 
 ## Run it locally (24 GB GPU)
 
 Tested on an RTX 4090: one 5-second clip renders in about 2-3 minutes.
 
-1. ComfyUI 0.41+ with these custom nodes: [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo),
-   [ComfyUI-GGUF](https://github.com/city96/ComfyUI-GGUF) (optional), [comfyui_controlnet_aux](https://github.com/Fannovel16/comfyui_controlnet_aux),
-   [ComfyUI-Video-Depth-Anything](https://github.com/yuvraj108c/ComfyUI-Video-Depth-Anything) (Restyle only).
+1. ComfyUI 0.41+ with these custom nodes: [ComfyUI-LTXVideo](https://github.com/Lightricks/ComfyUI-LTXVideo) and
+   [ComfyUI-Video-Depth-Anything](https://github.com/yuvraj108c/ComfyUI-Video-Depth-Anything) (restyle and composite looks).
 2. Models (accept the LTX-2.x Community License on Hugging Face first; sizes are approximate):
 
    | Folder | File | Size |
@@ -93,7 +137,7 @@ Tested on an RTX 4090: one 5-second clip renders in about 2-3 minutes.
 The same `workflows/ltx25_v2v.api.json` deploys as a Comfy API endpoint (`comfy build init` with the models above as blobs,
 `comfy build push --release --target linux/nvidia`, `comfy deploy up --gpu rtx-pro-6000-server --min 0 --max 1`).
 Then set `COMFY_BASE_URL=https://<deployment>.run.comfy.app` and a real `COMFY_API_KEY`.
-See `docs/deploy.md` (coming with the deployment).
+See [`docs/deploy.md`](docs/deploy.md).
 
 ## Licenses
 
