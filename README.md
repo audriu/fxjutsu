@@ -79,3 +79,5 @@ See `docs/deploy.md` (coming with the deployment).
 
 App code: MIT. Models: LTX-2.5 and the Lightricks adapters under the LTX-2.x Community License; AInVFX Fluid under the same;
 Video-Depth-Anything Small under Apache-2.0. Your footage never leaves your deployment.
+
+Sample clip in `public/samples/` is a trimmed [Pexels](https://www.pexels.com/video/a-woman-in-a-trench-coat-walking-at-a-park-9968182/) video (Pexels License).
