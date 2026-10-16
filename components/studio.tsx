@@ -77,8 +77,20 @@ export function Studio() {
         if (!res.ok) throw new Error(typeof next.error === "string" ? next.error : "Could not check the job.");
         setJob(next);
         setRetry(0);
-        setElapsed(Math.round((Date.now() - startedAt.current) / 1000));
-        setMessage(next.status === "queued" ? "Waiting for a GPU…" : `Rendering ${preset.name}… (${Math.round((Date.now() - startedAt.current) / 1000)}s)`);
+        const secs = Math.round((Date.now() - startedAt.current) / 1000);
+        setElapsed(secs);
+        if (DONE.includes(next.status)) {
+          setBusy(false);
+          if (next.status === "succeeded" || next.status === "completed") {
+            setError(false);
+            setMessage(`Done in ${secs}s. Drag the slider to compare.`);
+          } else {
+            setError(true);
+            setMessage(`${errorText(next.error)} (job ${next.id})`);
+          }
+        } else {
+          setMessage(next.status === "queued" ? "Waiting for a GPU…" : `Rendering ${preset.name}… (${secs}s)`);
+        }
       } catch (cause) {
         setError(true);
         setMessage(cause instanceof Error ? cause.message : "Could not check the job.");
@@ -87,19 +99,6 @@ export function Studio() {
     }, retry ? 5000 : 2500);
     return () => window.clearTimeout(timer);
   }, [job, retry, preset.name]);
-
-  // finish
-  useEffect(() => {
-    if (!job || !DONE.includes(job.status)) return;
-    setBusy(false);
-    if (job.status === "succeeded" || job.status === "completed") {
-      setError(false);
-      setMessage(`Done in ${Math.round((Date.now() - startedAt.current) / 1000)}s. Drag the slider to compare.`);
-    } else {
-      setError(true);
-      setMessage(`${errorText(job.error)} (job ${job.id})`);
-    }
-  }, [job]);
 
   async function chooseVideo(file: File | undefined) {
     setJob(null);
@@ -190,6 +189,10 @@ export function Studio() {
                 <div className="text-3xl">🎬</div>
                 <div className="mt-2">Click to choose a clip (MP4, MOV or WebM, up to 100 MB)</div>
                 <div className="mt-1 text-xs text-zinc-500">4-8 seconds works best. Landscape or portrait.</div>
+                <button type="button" className="mt-4 rounded-lg border border-zinc-700 px-3 py-1.5 text-xs text-zinc-300 hover:border-fuchsia-500"
+                  onClick={async (e) => { e.preventDefault(); const r = await fetch("/samples/queen-robots.mp4"); const b = await r.blob(); chooseVideo(new File([b], "queen-robots.mp4", { type: "video/mp4" })); }}>
+                  or try the sample clip
+                </button>
               </div>
             )}
           </label>
