@@ -23,7 +23,12 @@ export type EffectRequest = {
   notes: string;
   strength?: number;
   seed?: number;
+  /** sd = shorter side 544 px (fast, ~2 min on a 4090); hd = shorter side 704 px (~1.6x slower, more VRAM). */
+  quality?: "sd" | "hd";
 };
+
+// Both the v2v and union graphs size the render from the source clip: ResizeImageMaskNode "scale shorter dimension".
+const RESIZE = { v2v: "5548:5026", union: "5548:5026" } as const;
 
 // Node ids inside workflows/ltx25_union_control.api.json (Lightricks Union Control graph: depth from the clip guides a restyle).
 const UNION = {
@@ -105,6 +110,7 @@ export async function submitEffect(video: File, firstFrame: File, req: EffectReq
   workflow.setInput(map.lora, "strength_model", clamp(req.strength ?? preset.strength, 0.5, 1.6));
   workflow.setInput(map.seed, "noise_seed", seed);
   workflow.setInput(map.save, "filename_prefix", `fxjutsu/${preset.id}`);
+  workflow.setInput(RESIZE[preset.workflow === "union" ? "union" : "v2v"], "resize_type.shorter_size", req.quality === "hd" ? 704 : 544);
 
   return publicJob(await comfy.submit(workflow));
 }

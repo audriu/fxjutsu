@@ -15,6 +15,7 @@ export async function POST(request: Request) {
   let notes = "";
   let strength: number | undefined;
   let seed: number | undefined;
+  let quality: "sd" | "hd" = "sd";
   try {
     const form = await request.formData();
     presetId = String(form.get("preset") ?? "");
@@ -42,6 +43,7 @@ export async function POST(request: Request) {
     notes = String(form.get("notes") ?? "").slice(0, 300);
     const s = form.get("strength");
     if (s !== null && s !== "") strength = Number(s);
+    if (form.get("quality") === "hd") quality = "hd";
     const sd = form.get("seed");
     if (sd !== null && sd !== "") seed = Number(sd);
   } catch (error) {
@@ -53,8 +55,8 @@ export async function POST(request: Request) {
 
   try {
     const job = painted
-      ? await submitFluid(painted.first, painted.last, { width: painted.width, height: painted.height }, { presetId, scene, notes, strength, seed })
-      : await submitEffect(video!, frame!, { presetId, scene, notes, strength, seed });
+      ? await submitFluid(painted.first, painted.last, { width: painted.width, height: painted.height }, { presetId, scene, notes, strength, seed, quality })
+      : await submitEffect(video!, frame!, { presetId, scene, notes, strength, seed, quality });
     started(job.id);
     return NextResponse.json(job, { status: 202 });
   } catch (error) {

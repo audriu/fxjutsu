@@ -61,6 +61,7 @@ export function Studio() {
   const [retry, setRetry] = useState(0);
   const [compare, setCompare] = useState(50);
   const [painted, setPainted] = useState<PaintedFrames | null>(null);
+  const [quality, setQuality] = useState<"sd" | "hd">("sd");
   const startedAt = useRef<number>(0);
   const [elapsed, setElapsed] = useState(0);
 
@@ -146,6 +147,7 @@ export function Studio() {
     form.set("scene", scene);
     form.set("notes", notes);
     form.set("strength", String(strength));
+    form.set("quality", quality);
     try {
       const res = await fetch("/api/jobs", { method: "POST", body: form });
       const next = (await res.json()) as Job & { error?: string };
@@ -236,6 +238,16 @@ export function Studio() {
                 <input value={notes} onChange={(e) => setNotes(e.target.value)} maxLength={300} placeholder="warm sodium street lights, light rain"
                   className="mt-1 w-full rounded-lg border border-zinc-700 bg-zinc-950 px-3 py-2 outline-none focus:border-fuchsia-500" />
               </label>
+            )}
+            {preset.workflow !== "fluid" && (
+              <div className="flex items-center gap-2 text-sm">
+                <span className="text-zinc-400">Quality</span>
+                {(["sd", "hd"] as const).map((q) => (
+                  <button key={q} type="button" onClick={() => setQuality(q)} className={`rounded px-2 py-1 text-xs ${quality === q ? "bg-fuchsia-600 text-white" : "bg-zinc-800 text-zinc-300"}`}>
+                    {q === "sd" ? "Standard (544p, ~2 min)" : "HD (704p, ~3-4 min)"}
+                  </button>
+                ))}
+              </div>
             )}
             <label className="block text-sm">
               <span className="text-zinc-400">Intensity {strength.toFixed(2)}</span>
