@@ -2,13 +2,16 @@
 // applied through the Lightricks video-to-video graph (workflows/ltx25_v2v.api.json).
 // Prompt conventions follow the adapter model cards (see docs/adapters.md).
 
-export type Family = "subject" | "world" | "elemental" | "utility";
+export type Family = "subject" | "world" | "elemental" | "look" | "utility";
+export type WorkflowKind = "v2v" | "union" | "fluid";
 
 export type Preset = {
   id: string;
   name: string;
   tagline: string;
   family: Family;
+  /** Which graph runs this preset. v2v = reference-video IC-LoRA edit, union = depth-guided restyle, fluid = painted-keyframe simulation. */
+  workflow: WorkflowKind;
   lora: string;
   strength: number;
   /** Positive prompt. `{scene}` is replaced by the user's one-line scene description (or a generic phrase). */
@@ -25,6 +28,7 @@ export const PRESETS: Preset[] = [
     name: "Vanish",
     tagline: "Remove every person, creature and vehicle. Keep the location.",
     family: "subject",
+    workflow: "v2v",
     lora: "ltx-2.5-22b-ic-lora-clean-plate-1.0.safetensors",
     strength: 1.0,
     prompt:
@@ -39,6 +43,7 @@ export const PRESETS: Preset[] = [
     name: "Day to Night",
     tagline: "Relight the shot as a moonlit night. Same motion, same framing.",
     family: "world",
+    workflow: "v2v",
     lora: "ltx-2.5-22b-ic-lora-day-to-night-0.9.safetensors",
     strength: 1.0,
     prompt:
@@ -52,6 +57,7 @@ export const PRESETS: Preset[] = [
     name: "Flood",
     tagline: "Shallow rushing water fills the scene and reacts to everything in it.",
     family: "elemental",
+    workflow: "v2v",
     lora: "ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
     strength: 1.15,
     prompt:
@@ -65,6 +71,7 @@ export const PRESETS: Preset[] = [
     name: "Tsunami",
     tagline: "A wall of churning water crashes through the shot.",
     family: "elemental",
+    workflow: "v2v",
     lora: "ltx-2.5-22b-ic-lora-water-simulation-0.9.safetensors",
     strength: 1.35,
     prompt:
@@ -78,6 +85,7 @@ export const PRESETS: Preset[] = [
     name: "Alpha Matte",
     tagline: "Pull a clean alpha matte of the foreground. No green screen needed.",
     family: "utility",
+    workflow: "v2v",
     lora: "ltx-2.5-22b-ic-lora-alpha-gen-0.9.safetensors",
     strength: 1.0,
     prompt: "",
@@ -85,12 +93,78 @@ export const PRESETS: Preset[] = [
     acceptsNotes: false,
     emoji: "🎭",
   },
+  {
+    id: "fire",
+    name: "Set on Fire",
+    tagline: "Paint where the flames go. The shot is re-generated with a fire and smoke simulation.",
+    family: "elemental",
+    workflow: "fluid",
+    lora: "ainvfx-fluid.safetensors",
+    strength: 1.0,
+    prompt: "ainvfxfluid, roaring orange and yellow flames with thick grey smoke rising where painted, fire light flickering on the surroundings, {scene}",
+    negative: "blurry, low quality, distorted, watermark",
+    acceptsNotes: true,
+    emoji: "🔥",
+  },
+  {
+    id: "smoke",
+    name: "Smoke",
+    tagline: "Paint a plume. Get drifting smoke or steam that follows your shape.",
+    family: "elemental",
+    workflow: "fluid",
+    lora: "ainvfx-fluid.safetensors",
+    strength: 1.0,
+    prompt: "ainvfxfluid, a thick plume of grey smoke rising and drifting where painted, soft volumetric lighting, {scene}",
+    negative: "blurry, low quality, distorted, watermark",
+    acceptsNotes: true,
+    emoji: "💨",
+  },
+  {
+    id: "clay",
+    name: "Claymation",
+    tagline: "Re-render the shot as stop-motion plasticine. Structure and motion stay.",
+    family: "look",
+    workflow: "union",
+    lora: "ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors",
+    strength: 1.0,
+    prompt: "The same scene rendered as a claymation stop-motion film: every subject is a plasticine figure with fingerprints and matte surfaces, the environment is sculpted clay and felt, soft studio lighting, identical composition, framing and camera motion as the source. {scene}",
+    negative: "photorealistic, blurry, distorted, jittery, inconsistent motion",
+    acceptsNotes: true,
+    emoji: "🧱",
+  },
+  {
+    id: "ice",
+    name: "Frozen",
+    tagline: "Everything turns to ice and frost. Same shapes, same motion.",
+    family: "look",
+    workflow: "union",
+    lora: "ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors",
+    strength: 1.0,
+    prompt: "The same scene frozen solid: every surface and subject covered in translucent blue ice and white frost, icicles, cold winter light, frozen breath in the air, identical composition, framing and camera motion as the source. {scene}",
+    negative: "warm, summer, blurry, distorted, jittery, inconsistent motion",
+    acceptsNotes: true,
+    emoji: "🧊",
+  },
+  {
+    id: "anime",
+    name: "Anime",
+    tagline: "A hand-drawn anime look over your real footage.",
+    family: "look",
+    workflow: "union",
+    lora: "ltx-2.3-22b-ic-lora-union-control-ref0.5.safetensors",
+    strength: 1.0,
+    prompt: "The same scene as a high-quality 2D anime: clean line art, cel shading, vibrant painted backgrounds, expressive characters, identical composition, framing and camera motion as the source. {scene}",
+    negative: "photorealistic, 3d render, blurry, distorted, jittery",
+    acceptsNotes: true,
+    emoji: "✨",
+  },
 ];
 
 export const FAMILY_LABEL: Record<Family, string> = {
   subject: "Subject",
   world: "World",
   elemental: "Elemental",
+  look: "Look",
   utility: "Compositing",
 };
 

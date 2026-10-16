@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FAMILY_LABEL, PRESETS, type Preset } from "@/lib/presets";
+import { PaintKeyframes, type PaintedFrames } from "@/components/paint";
 
 type Output = { id: string; name: string; type: string; url: string };
 type Job = { id: string; status: string; outputs: Output[]; error?: unknown };
@@ -59,6 +60,7 @@ export function Studio() {
   const [error, setError] = useState(false);
   const [retry, setRetry] = useState(0);
   const [compare, setCompare] = useState(50);
+  const [painted, setPainted] = useState<PaintedFrames | null>(null);
   const startedAt = useRef<number>(0);
   const [elapsed, setElapsed] = useState(0);
 
@@ -105,6 +107,7 @@ export function Studio() {
     setVideo(null);
     setFrame(null);
     setMeta(null);
+    setPainted(null);
     if (!file) return setMessage("Drop a 4-15 second clip to start.");
     try {
       const info = await extractFirstFrame(file);
@@ -124,15 +127,23 @@ export function Studio() {
 
   async function generate() {
     if (!video || !frame || busy) return;
+    if (preset.workflow === "fluid" && !painted) { setError(true); setMessage("Paint the keyframes and click \"Use these keyframes\" first."); return; }
     setBusy(true);
     setError(false);
     setJob(null);
     startedAt.current = Date.now();
     setMessage("Uploading the clip and starting the render…");
     const form = new FormData();
-    form.set("video", video);
-    form.set("frame", new File([frame], "first-frame.png", { type: "image/png" }));
     form.set("preset", preset.id);
+    if (preset.workflow === "fluid" && painted) {
+      form.set("paintedFirst", new File([painted.first], "first.png", { type: "image/png" }));
+      form.set("paintedLast", new File([painted.last], "last.png", { type: "image/png" }));
+      form.set("width", String(painted.width));
+      form.set("height", String(painted.height));
+    } else {
+      form.set("video", video);
+      form.set("frame", new File([frame], "first-frame.png", { type: "image/png" }));
+    }
     form.set("scene", scene);
     form.set("notes", notes);
     form.set("strength", String(strength));
@@ -193,7 +204,7 @@ export function Studio() {
                     <button
                       key={p.id}
                       type="button"
-                      onClick={() => { setPreset(p); setStrength(p.strength); }}
+                      onClick={() => { setPreset(p); setStrength(p.strength); setPainted(null); }}
                       className={`rounded-xl border p-3 text-left transition ${preset.id === p.id ? "border-fuchsia-500 bg-fuchsia-500/10" : "border-zinc-800 bg-zinc-900/60 hover:border-zinc-600"}`}
                     >
                       <div className="text-xl">{p.emoji}</div>
@@ -205,6 +216,10 @@ export function Studio() {
               </div>
             ))}
           </div>
+
+          {preset.workflow === "fluid" && frame && (
+            <PaintKeyframes frame={frame} onChange={setPainted} />
+          )}
 
           <div className="space-y-3 rounded-2xl border border-zinc-800 bg-zinc-900/60 p-4">
             <label className="block text-sm">
@@ -225,7 +240,7 @@ export function Studio() {
             </label>
             <button type="button" disabled={!video || busy} onClick={generate}
               className="w-full rounded-xl bg-fuchsia-600 px-4 py-3 font-medium text-white transition hover:bg-fuchsia-500 disabled:cursor-not-allowed disabled:bg-zinc-700">
-              {busy ? "Rendering…" : `Apply ${preset.name}`}
+              {busy ? "Rendering…" : preset.workflow === "fluid" && !painted ? "Paint keyframes to continue" : `Apply ${preset.name}`}
             </button>
             <p className={`text-sm ${error ? "text-rose-400" : "text-zinc-400"}`}>{message}</p>
           </div>
