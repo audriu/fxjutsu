@@ -17,6 +17,20 @@ IC-LoRA adapters. No partner API nodes anywhere in the pipeline.
 | Set on Fire / Smoke | Paint where the fire or smoke goes, get a simulation that grows between your keyframes | AInVFX Fluid |
 | Claymation / Frozen / Anime | Re-render the shot in a new look while keeping its structure and motion | Union Control (depth) |
 
+## Examples (before on top, after below)
+
+| Vanish, real street footage | Day to Night, real park footage |
+|---|---|
+| ![Vanish](docs/examples/vanish_street.jpg) | ![Night](docs/examples/night_park.jpg) |
+
+| Claymation (depth-guided restyle) | Fire from painted keyframes (top: the two painted frames) |
+|---|---|
+| ![Clay](docs/examples/claymation.jpg) | ![Fire](docs/examples/fire_keyframes.jpg) |
+
+Water simulation (middle row) and alpha matte (bottom row) on the same clip: ![Water and matte](docs/examples/water_and_matte.jpg)
+
+All renders: RTX 4090, LTX-2.5 distilled int8, 8 steps, native resolution, 2-3 minutes per 5-second clip.
+
 ## How it works
 
 ```

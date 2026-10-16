@@ -70,3 +70,6 @@ Ecmascript file had an error
  GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 405ms (next.js: 0.8ms, application-code: 404ms)
  GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 688ms (next.js: 13ms, application-code: 675ms)
  GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 1694ms (next.js: 13ms, application-code: 1680ms)
+ GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 751ms (next.js: 12ms, application-code: 739ms)
+ GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 761ms (next.js: 13ms, application-code: 748ms)
+ GET /api/jobs/563b2a48-477d-4782-ba3e-e0520c27e2ba 200 in 393ms (next.js: 14ms, application-code: 379ms)
