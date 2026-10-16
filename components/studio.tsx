@@ -149,8 +149,10 @@ export function Studio() {
     }
   }
 
+  // The LoadVideo node echoes the uploaded clip as an output; the rendered file is named <preset>_NNNNN_.mp4.
+  const rendered = (job?.outputs ?? []).filter((o) => /\.(mp4|webm|mov)$/i.test(o.name) && !/^LTX|input/i.test(o.type + o.name) && o.name.startsWith(preset.id));
   const result = job && (job.status === "succeeded" || job.status === "completed")
-    ? job.outputs.find((o) => /\.(mp4|webm|mov)$/i.test(o.name)) ?? job.outputs[0]
+    ? rendered[rendered.length - 1] ?? job.outputs.filter((o) => /\.(mp4|webm|mov)$/i.test(o.name)).at(-1)
     : undefined;
 
   const families = Array.from(new Set(PRESETS.map((p) => p.family)));
@@ -254,7 +256,7 @@ export function Studio() {
                 <input type="range" min={0} max={100} value={compare} onChange={(e) => setCompare(Number(e.target.value))} className="mt-1 w-full accent-fuchsia-500" />
               </label>
               <div className="flex flex-wrap gap-2">
-                {job?.outputs.map((o) => (
+                {(rendered.length ? rendered : job?.outputs ?? []).map((o) => (
                   <a key={o.id} href={o.url} download={o.name} className="rounded-lg border border-zinc-700 px-3 py-1.5 text-sm hover:border-fuchsia-500">
                     Download {o.name}
                   </a>
