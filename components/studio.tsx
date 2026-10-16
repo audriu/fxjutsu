@@ -244,7 +244,7 @@ export function Studio() {
                 <span className="text-zinc-400">Quality</span>
                 {(["sd", "hd"] as const).map((q) => (
                   <button key={q} type="button" onClick={() => setQuality(q)} className={`rounded px-2 py-1 text-xs ${quality === q ? "bg-fuchsia-600 text-white" : "bg-zinc-800 text-zinc-300"}`}>
-                    {q === "sd" ? "Standard (544p, ~2 min)" : "HD (704p, ~3-4 min)"}
+                    {q === "sd" ? "Standard (544p, ~2 min)" : "HD (704p, ~2-3 min)"}
                   </button>
                 ))}
               </div>
